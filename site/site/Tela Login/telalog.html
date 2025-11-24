@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="utf-8">
+    <meta lang = "pt-br">
+        <link rel="stylesheet" href="telalog.css" 
+    </head>
+    
+    <body>
+        <div id="quadrado"></div>
+        <button id="submit" onclick="logar()">Confirmar</button>
+        <h2 id="titulo">Login</h2>
+        <input id="user" placeholder="Digite o Usuario"></button>
+        <p id="mensagem">Usuario:</p>
+        <p id="mensage">Senha:</p>
+        <input id="senha" placeholder="Digite a senha"></input>
+        <script href="/pg.js"> 
+
+  var botao = document.getElementById("submit");
+  botao.addEventListener("click", function () {
+  var usuario = document.getElementById("user").value;
+  var senha = document.getElementById("senha").value;
+  var usuarioCorreto = "adm";
+  var senhaCorreta = "adm";
+  if (usuario === usuarioCorreto && senha === senhaCorreta) {
+    alert("Login realizado com sucesso!");
+    location.href = "Alogin.html"
+
+  } else {
+    alert("Usuário ou senha incorretos!");
+    
+  }
+});
+        </script>
+    </body>
+</html>
