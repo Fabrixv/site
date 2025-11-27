@@ -5,13 +5,17 @@ body {
     min-height: 100vh;
 }
 #quadrado {
-    background: linear-gradient(to right, #b2b1fc, #6f57f8);
-    height: 400px;
-    width: 400px ;
+    /*background: linear-gradient(to right, #b2b1fc, #6f57f8);*/
+    background-image: url('./eita.jfif');
+    background-size: cover;
+    height: 450px;
+    width: 450px ;
     border: 10px;
     justify-self: center;
-    margin-top: 100px;
+    margin-top: 190px;
     opacity: 100%;
+    border-radius: 1000px;
+    box-shadow: 0 0 2em #dadf57;
 } 
 #submit {
     background-color: #dadf57;
