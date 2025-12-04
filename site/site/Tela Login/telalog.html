@@ -1,37 +1,185 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Login</title>
-        <meta charset="utf-8">
-    <meta lang = "pt-br">
-        <link rel="stylesheet" href="telalog.css">
-    </head>
-    
-    <body>
-        <div id="quadrado"></div>
-        <button id="submit" onclick="logar()">Confirmar</button>
-        <h2 id="titulo">Login</h2>
-        <input type="text" id="user" placeholder="Digite o Usuario"></button>
-        <p id="mensagem">Usuario:</p>
-        <p id="mensage">Senha:</p>
-        <input type="password" id="senha" placeholder="Digite a senha"></input>
-        <script href="/pg.js"> 
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — Partículas</title>
+  <link rel="stylesheet" href="telalog.css">
+</head>
+<body>
 
-  var botao = document.getElementById("submit");
-  botao.addEventListener("click", function () {
-  var usuario = document.getElementById("user").value;
-  var senha = document.getElementById("senha").value;
-  var usuarioCorreto = "adm";
-  var senhaCorreta = "adm";
-  if (usuario === usuarioCorreto && senha === senhaCorreta) {
-    alert("Login realizado com sucesso!");
-    location.href = "Alogin.html"
+  <!-- Canvas para partículas -->
+  <canvas id="particles"></canvas>
 
+  <!-- Conteúdo central -->
+  <main class="wrap" role="main" aria-labelledby="mainTitle">
+    <div class="card">
+      <h1 id="mainTitle">Entrar</h1>
+
+      <!-- Área de login -->
+      <section id="loginView" class="view">
+        <label class="label">Usuário
+          <input id="loginUser" type="text" placeholder="Seu usuário" />
+        </label>
+
+        <label class="label">Senha
+          <div class="field-with-btn">
+            <input id="loginPass" type="password" placeholder="Sua senha" />
+            <button class="showBtn" type="button" aria-label="Mostrar senha" onclick="toggleSenha('loginPass', this)">👁</button>
+          </div>
+        </label>
+
+        <button class="action" id="btnLogin">Entrar</button>
+
+        <p class="switch" id="toCreate">Criar conta →</p>
+      </section>
+
+      <!-- Área de criar conta -->
+      <section id="createView" class="view" style="display:none;">
+        <h2 class="sub">Criar Conta</h2>
+
+        <label class="label">Novo usuário
+          <input id="newUser" type="text" placeholder="Escolha um nome" />
+        </label>
+
+        <label class="label">Nova senha
+          <div class="field-with-btn">
+            <input id="newPass" type="password" placeholder="Crie uma senha" />
+            <button class="showBtn" type="button" aria-label="Mostrar senha" onclick="toggleSenha('newPass', this)">👁</button>
+          </div>
+        </label>
+
+        <button class="action" id="btnCreate">Criar conta</button>
+
+        <p class="switch" id="toLogin">← Já tenho conta</p>
+      </section>
+    </div>
+  </main>
+
+<script>
+/* ========================
+   Partículas (canvas)
+   ======================== */
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+  }
+  window.addEventListener('resize', resize, {passive:true});
+  resize();
+
+  const particles = [];
+  const COUNT = Math.round(window.innerWidth / 12);
+
+  for (let i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: 0.8 + Math.random() * 1.8,
+      v: 0.6 + Math.random() * 2
+    });
+  }
+
+  function frame(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = 'rgba(255,255,255,0.92)';
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fill();
+      p.y += p.v;
+      if (p.y > canvas.height + 10) {
+        p.y = -10;
+        p.x = Math.random() * canvas.width;
+      }
+    });
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* ========================
+   UI Logic: trocar views
+   ======================== */
+const loginView = document.getElementById('loginView');
+const createView = document.getElementById('createView');
+const toCreate = document.getElementById('toCreate');
+const toLogin = document.getElementById('toLogin');
+
+toCreate.addEventListener('click', () => {
+  loginView.style.display = 'none';
+  createView.style.display = 'block';
+  document.getElementById('mainTitle').textContent = 'Criar Conta';
+});
+toLogin.addEventListener('click', () => {
+  createView.style.display = 'none';
+  loginView.style.display = 'block';
+  document.getElementById('mainTitle').textContent = 'Entrar';
+});
+
+/* ========================
+   Mostrar / esconder senha
+   - id: id do input
+   - btn: botão que foi clicado (this)
+   ======================== */
+function toggleSenha(id, btn) {
+  const input = document.getElementById(id);
+  if (!input) return;
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = '🙈';
+    btn.setAttribute('aria-pressed', 'true');
   } else {
-    alert("Usuário ou senha incorretos!");
-    
+    input.type = 'password';
+    btn.textContent = '👁';
+    btn.setAttribute('aria-pressed', 'false');
+  }
+}
+
+/* ========================
+   Criar conta (localStorage)
+   ======================== */
+document.getElementById('btnCreate').addEventListener('click', () => {
+  const user = document.getElementById('newUser').value.trim();
+  const pass = document.getElementById('newPass').value;
+
+  if (!user || !pass) {
+    alert('Preencha usuário e senha.');
+    return;
+  }
+
+  // salvar localmente (exemplo educacional)
+  localStorage.setItem('app_user', user);
+  localStorage.setItem('app_pass', pass);
+
+  alert('Conta criada com sucesso!');
+  // volta para login e limpa campos
+  document.getElementById('newUser').value = '';
+  document.getElementById('newPass').value = '';
+  toLogin.click();
+});
+
+/* ========================
+   Login
+   ======================== */
+document.getElementById('btnLogin').addEventListener('click', () => {
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value;
+
+  const storedUser = localStorage.getItem('app_user') || '';
+  const storedPass = localStorage.getItem('app_pass') || '';
+
+  if (user === storedUser && pass === storedPass && user !== '') {
+    alert('Login bem-sucedido!');
+    location.href = 'Alogin.html';
+  } else {
+    alert('Usuário ou senha incorretos!');
   }
 });
-        </script>
-    </body>
+</script>
+
+</body>
 </html>
