@@ -8,15 +8,13 @@
 </head>
 <body>
 
-  <!-- Canvas para partículas -->
   <canvas id="particles"></canvas>
 
-  <!-- Conteúdo central -->
   <main class="wrap" role="main" aria-labelledby="mainTitle">
     <div class="card">
       <h1 id="mainTitle">Entrar</h1>
 
-      <!-- Área de login -->
+      <!-- ================= LOGIN ================= -->
       <section id="loginView" class="view">
         <label class="label">Usuário
           <input id="loginUser" type="text" placeholder="Seu usuário" />
@@ -25,27 +23,44 @@
         <label class="label">Senha
           <div class="field-with-btn">
             <input id="loginPass" type="password" placeholder="Sua senha" />
-            <button class="showBtn" type="button" aria-label="Mostrar senha" onclick="toggleSenha('loginPass', this)">👁</button>
+            <button class="showBtn" type="button" onclick="toggleSenha('loginPass', this)">👁</button>
           </div>
         </label>
 
         <button class="action" id="btnLogin">Entrar</button>
 
+        <p class="switch" id="toForgot">Esqueceu a senha?</p>
         <p class="switch" id="toCreate">Criar conta →</p>
       </section>
 
-      <!-- Área de criar conta -->
+      <!-- ================= CRIAR CONTA ================= -->
       <section id="createView" class="view" style="display:none;">
         <h2 class="sub">Criar Conta</h2>
 
-        <label class="label">Novo usuário
-          <input id="newUser" type="text" placeholder="Escolha um nome" />
+        <label class="label">Nome
+          <input id="newNome" type="text" placeholder="Seu nome" />
         </label>
 
-        <label class="label">Nova senha
+        <label class="label">Sobrenome
+          <input id="newSobrenome" type="text" placeholder="Seu sobrenome" />
+        </label>
+
+        <label class="label">Data de nascimento
+          <input id="newNascimento" type="date" />
+        </label>
+
+        <label class="label">E-mail
+          <input id="newEmail" type="email" placeholder="Seu e-mail" />
+        </label>
+
+        <label class="label">Usuário
+          <input id="newUser" type="text" placeholder="Escolha um usuário" />
+        </label>
+
+        <label class="label">Senha
           <div class="field-with-btn">
             <input id="newPass" type="password" placeholder="Crie uma senha" />
-            <button class="showBtn" type="button" aria-label="Mostrar senha" onclick="toggleSenha('newPass', this)">👁</button>
+            <button class="showBtn" type="button" onclick="toggleSenha('newPass', this)">👁</button>
           </div>
         </label>
 
@@ -53,13 +68,25 @@
 
         <p class="switch" id="toLogin">← Já tenho conta</p>
       </section>
+
+      <!-- ================= ESQUECEU A SENHA ================= -->
+      <section id="forgotView" class="view" style="display:none;">
+        <h2 class="sub">Recuperar senha</h2>
+
+        <label class="label">E-mail cadastrado
+          <input id="recoverEmail" type="email" placeholder="Digite seu e-mail" />
+        </label>
+
+        <button class="action" id="btnRecover">Enviar</button>
+
+        <p class="switch" id="backLogin">← Voltar ao login</p>
+      </section>
+
     </div>
   </main>
 
-<script>
-/* ========================
-   Partículas (canvas)
-   ======================== */
+  <script>
+/* ---------------- Partículas ---------------- */
 (function(){
   const canvas = document.getElementById('particles');
   const ctx = canvas.getContext('2d');
@@ -101,85 +128,98 @@
   frame();
 })();
 
-/* ========================
-   UI Logic: trocar views
-   ======================== */
+/* ---------------- Seletores ---------------- */
 const loginView = document.getElementById('loginView');
 const createView = document.getElementById('createView');
-const toCreate = document.getElementById('toCreate');
-const toLogin = document.getElementById('toLogin');
+const forgotView = document.getElementById('forgotView');
 
-toCreate.addEventListener('click', () => {
+document.getElementById('toCreate').onclick = () => showView('create');
+document.getElementById('toLogin').onclick = () => showView('login');
+document.getElementById('toForgot').onclick = () => showView('forgot');
+document.getElementById('backLogin').onclick = () => showView('login');
+
+function showView(view) {
   loginView.style.display = 'none';
-  createView.style.display = 'block';
-  document.getElementById('mainTitle').textContent = 'Criar Conta';
-});
-toLogin.addEventListener('click', () => {
   createView.style.display = 'none';
-  loginView.style.display = 'block';
-  document.getElementById('mainTitle').textContent = 'Entrar';
-});
+  forgotView.style.display = 'none';
 
-/* ========================
-   Mostrar / esconder senha
-   - id: id do input
-   - btn: botão que foi clicado (this)
-   ======================== */
-function toggleSenha(id, btn) {
-  const input = document.getElementById(id);
-  if (!input) return;
-  if (input.type === 'password') {
-    input.type = 'text';
-    btn.textContent = '🙈';
-    btn.setAttribute('aria-pressed', 'true');
-  } else {
-    input.type = 'password';
-    btn.textContent = '👁';
-    btn.setAttribute('aria-pressed', 'false');
+  if (view === 'login') {
+    loginView.style.display = 'block';
+    document.getElementById('mainTitle').textContent = 'Entrar';
+  } else if (view === 'create') {
+    createView.style.display = 'block';
+    document.getElementById('mainTitle').textContent = 'Criar Conta';
+  } else if (view === 'forgot') {
+    forgotView.style.display = 'block';
+    document.getElementById('mainTitle').textContent = 'Recuperar Senha';
   }
 }
 
-/* ========================
-   Criar conta (localStorage)
-   ======================== */
-document.getElementById('btnCreate').addEventListener('click', () => {
-  const user = document.getElementById('newUser').value.trim();
-  const pass = document.getElementById('newPass').value;
+/* ---------------- Mostrar senha ---------------- */
+function toggleSenha(id, btn) {
+  const input = document.getElementById(id);
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    input.type = 'password';
+    btn.textContent = '👁';
+  }
+}
 
-  if (!user || !pass) {
-    alert('Preencha usuário e senha.');
+/* ---------------- Criar conta ---------------- */
+document.getElementById('btnCreate').addEventListener('click', () => {
+
+  const data = {
+    nome:        document.getElementById('newNome').value.trim(),
+    sobrenome:   document.getElementById('newSobrenome').value.trim(),
+    nascimento:  document.getElementById('newNascimento').value,
+    email:       document.getElementById('newEmail').value.trim(),
+    user:        document.getElementById('newUser').value.trim(),
+    pass:        document.getElementById('newPass').value
+  };
+
+  if (!data.nome || !data.sobrenome || !data.nascimento || !data.email || !data.user || !data.pass) {
+    alert("Preencha todos os campos!");
     return;
   }
 
-  // salvar localmente (exemplo educacional)
-  localStorage.setItem('app_user', user);
-  localStorage.setItem('app_pass', pass);
+  // Armazena como JSON
+  localStorage.setItem('app_account', JSON.stringify(data));
 
   alert('Conta criada com sucesso!');
-  // volta para login e limpa campos
-  document.getElementById('newUser').value = '';
-  document.getElementById('newPass').value = '';
-  toLogin.click();
+  showView('login');
 });
 
-/* ========================
-   Login
-   ======================== */
+/* ---------------- Login ---------------- */
 document.getElementById('btnLogin').addEventListener('click', () => {
   const user = document.getElementById('loginUser').value.trim();
   const pass = document.getElementById('loginPass').value;
 
-  const storedUser = localStorage.getItem('app_user') || '';
-  const storedPass = localStorage.getItem('app_pass') || '';
+  const acc = JSON.parse(localStorage.getItem('app_account') || '{}');
 
-  if (user === storedUser && pass === storedPass && user !== '') {
-    alert('Login bem-sucedido!');
-    location.href = 'Alogin.html';
+  if (user === acc.user && pass === acc.pass) {
+    alert("Login bem-sucedido!");
+    location.href = "Alogin.html";
   } else {
-    alert('Usuário ou senha incorretos!');
+    alert("Usuário ou senha incorretos!");
   }
 });
-</script>
+
+/* ---------------- Recuperar senha ---------------- */
+document.getElementById('btnRecover').addEventListener('click', () => {
+  const emailTry = document.getElementById('recoverEmail').value.trim();
+  const acc = JSON.parse(localStorage.getItem('app_account') || '{}');
+
+  if (emailTry === acc.email) {
+    alert("Sua senha é: " + acc.pass);
+    showView('login');
+  } else {
+    alert("E-mail não encontrado!");
+  }
+});
+ 
+ </script>
 
 </body>
 </html>

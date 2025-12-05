@@ -1,8 +1,7 @@
-/* ===== reset básico ===== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html,body { height: 100%; font-family: Inter, system-ui, Arial, sans-serif; }
 
-/* ===== fundo azul ===== */
+
 body {
   background: linear-gradient(180deg,#0a3d62 0%, #0b5fa5 100%);
   display: flex;
@@ -11,17 +10,15 @@ body {
   overflow: hidden;
 }
 
-/* canvas fica atrás do conteúdo */
 #particles {
   position: fixed;
   inset: 0;
   z-index: 0;
 }
 
-/* wrapper central */
 .wrap {
   position: relative;
-  z-index: 2; /* acima do canvas */
+  z-index: 2; 
   width: 100%;
   display: flex;
   align-items: center;
@@ -29,7 +26,6 @@ body {
   padding: 20px;
 }
 
-/* cartão */
 .card {
   width: 360px;
   max-width: 94vw;
@@ -41,25 +37,22 @@ body {
   color: #eaf6ff;
 }
 
-/* título */
 .card h1 {
   font-size: 20px;
   margin-bottom: 12px;
   text-align: center;
 }
 
-/* sub-título na criação */
 .sub { margin-bottom: 10px; color: #dff7ff; }
 
-/* rótulos e campo (label engloba input para acessibilidade) */
+
 .label { display:block; font-size: 13px; color: #d7f0ff; margin-bottom: 8px; }
 
-/* campo com botão (mostrar senha) */
 .field-with-btn {
   position: relative;
 }
 
-/* inputs */
+
 input[type="text"],
 input[type="password"] {
   width: 100%;
@@ -73,7 +66,7 @@ input[type="password"] {
   display: block;
 }
 
-/* botão pequeno dentro do campo (mostrar senha) */
+
 .showBtn {
   position: absolute;
   right: 8px;
@@ -87,7 +80,6 @@ input[type="password"] {
   border-radius: 6px;
 }
 
-/* ação principal (botões grandes) */
 .action {
   width: 100%;
   padding: 12px;
@@ -101,7 +93,7 @@ input[type="password"] {
   color: #0b3a57;
 }
 
-/* troca de tela */
+
 .switch {
   text-align: center;
   margin-top: 10px;
@@ -113,7 +105,7 @@ input[type="password"] {
   cursor: pointer;
 }
 
-/* responsivo */
+
 @media (max-width:420px) {
   .card { padding: 18px; width: 92vw; }
   input { font-size: 14px; padding: 10px; }
