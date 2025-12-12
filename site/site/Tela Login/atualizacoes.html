@@ -1,51 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
-    <title>Atualizações</title>
+    <title>SmartSense - Monitoramento</title>
     <link rel="stylesheet" href="atualizacoes.css">
 </head>
 
 <body>
-    <header id="superior">
-        <a href="Alogin.html" class="aba1">Início</a>
-        <a href="bancadas.html" class="aba1">Bancadas</a>
-    </header>
 
-    <h1 class="titulo">Atualizações do Sistema</h1>
+<h1>SmartSense - Monitoramento das Bancadas</h1>
 
-    <div class="container">
+<div id="cards"></div>
 
-        <div class="card">
-            <h2>Status dos Pedidos</h2>
-            <p><strong>Tipos de Status:</strong></p>
-            <ul>
-                <li>Não iniciado</li>
-                <li>Aguardando módulo</li>
-                <li>Em processo</li>
-                <li>Finalizado</li>
-                <li>Cancelado</li>
-            </ul>
-        </div>
+<script>
+// URLs das bancadas
+const urls = [
+    { nome: "Estoque",   url: "http://10.77.241.163:1880/api/smartsense/estoque" },
+    { nome: "Processo",  url: "http://10.77.241.163:1880/api/smartsense/processo" },
+    { nome: "Montagem",  url: "http://10.77.241.163:1880/api/smartsense/montagem" },
+    { nome: "Expedição", url: "http://10.77.241.163:1880/api/smartsense/expedicao" }
+];
 
-        <div class="card">
-            <h2>Monitoramento das Bancadas</h2>
-            <p>Cada bancada coleta:</p>
-            <ul>
-                <li>Temperatura</li>
-                <li>Umidade</li>
-                <li>Status operacional dos 4 módulos</li>
-            </ul>
-        </div>
+// Campos que chegam da API
+const campos = ["humi", "ai00", "vrms", "irms", "appp", "actp"];
 
-        <div class="card">
-            <h2>Logs recentes</h2>
-            <p>Nenhuma atualização recente.</p>
-        </div>
+// Criar visual dos cards
+function criarCards() {
+    const container = document.getElementById("cards");
 
-    </div>
+    urls.forEach(item => {
+        let camposHTML = "";
+        campos.forEach(c => {
+            camposHTML += `<p><b>${c}:</b> <span class="${item.nome}-${c}">--</span></p>`;
+        });
+
+        container.innerHTML += `
+            <div class="card" id="${item.nome}">
+                <h2>${item.nome}</h2>
+                ${camposHTML}
+                <p class="atualizado" id="${item.nome}-hora">Atualizado: --:--:--</p>
+                <p class="erro" id="${item.nome}-erro"></p>
+            </div>
+        `;
+    });
+}
+
+// Atualizar valores no card
+function atualizarCard(nome, dados) {
+    campos.forEach(campo => {
+        const elemento = document.querySelector(`.${nome}-${campo}`);
+        elemento.textContent = dados[campo] !== undefined ? dados[campo] : "--";
+    });
+
+    const hora = new Date().toLocaleTimeString("pt-BR");
+    document.getElementById(nome + "-hora").textContent = "Atualizado: " + hora;
+    document.getElementById(nome + "-erro").textContent = "";
+}
+
+// Mostrar erro caso a API não responda
+function erroCard(nome) {
+    document.getElementById(nome + "-erro").textContent = "Erro ao carregar dados";
+}
+
+// Atualização geral
+async function atualizarTudo() {
+    for (const item of urls) {
+        try {
+            const r = await fetch(item.url, { cache: "no-store" });
+            const json = await r.json();
+
+            if (json && json.data) {
+                atualizarCard(item.nome, json.data);
+            } else {
+                erroCard(item.nome);
+            }
+
+        } catch (e) {
+            erroCard(item.nome);
+        }
+    }
+}
+
+// Inicialização
+criarCards();
+atualizarTudo();
+
+// Atualizar a cada 2 segundos
+setInterval(atualizarTudo, 2000);
+
+</script>
 
 </body>
 </html>
-

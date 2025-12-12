@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
+    background-color: #257cff;
     margin: 0;
     padding: 40px 20px;
     text-align: center;
@@ -41,6 +41,31 @@ h1 {
     transform: translateY(-8px);
     box-shadow: 0 2
 }
-    
+#superior {
+    height:3vw;
+    margin-left: -1vw;
+    background-color: #022957;
+    box-shadow: blue;
+    position: fixed;
+    top: 0;
+    width: 100vw; 
+}
+.aba1, .aba2 {
+    color: white;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    user-select: none;
+    display:flex;
+    gap:1vw;
+}
 
+.aba1:hover, .aba2:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffd700;
+    cursor: pointer;
+   
+}
 
