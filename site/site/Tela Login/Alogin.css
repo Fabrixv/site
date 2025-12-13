@@ -100,3 +100,12 @@ header {
         padding: 0.8rem 1rem;
     }
 }
+#superior {
+    height:3vw;
+    margin-left: -1vw;
+    background-color: #0074f8;
+    box-shadow: 0 4px 12px rgba(0, 116, 248, 0.6);
+    position: fixed;
+    top: 0;
+    width: 100vw; 
+}

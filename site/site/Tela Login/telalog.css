@@ -3,7 +3,7 @@ html,body { height: 100%; font-family: Inter, system-ui, Arial, sans-serif; }
 
 
 body {
-  background: linear-gradient(180deg,#0a3d62 0%, #0b5fa5 100%);
+  background: linear-gradient(135deg, #0f0141, #1a237e);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,4 +110,19 @@ input[type="password"] {
   .card { padding: 18px; width: 92vw; }
   input { font-size: 14px; padding: 10px; }
   .action { font-size: 14px; padding: 10px; }
+}
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-conteudo {
+  background: #fff;
+  width: 300px;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
 }
