@@ -16,84 +16,11 @@
         <a href="Alogin.html" class=aba2>Inicio</a>
         
     </header>
-
-<script>
-// URLs das bancadas
-const urls = [
-    { nome: "Estoque",   url: "http://10.77.241.163:1880/api/smartsense/estoque" },
-    { nome: "Processo",  url: "http://10.77.241.163:1880/api/smartsense/processo" },
-    { nome: "Montagem",  url: "http://10.77.241.163:1880/api/smartsense/montagem" },
-    { nome: "Expedição", url: "http://10.77.241.163:1880/api/smartsense/expedicao" }
-];
-
-// Campos que chegam da API
-const campos = ["humi", "ai00", "vrms", "irms", "appp", "actp"];
-
-// Criar visual dos cards
-function criarCards() {
-    const container = document.getElementById("cards");
-
-    urls.forEach(item => {
-        let camposHTML = "";
-        campos.forEach(c => {
-            camposHTML += `<p><b>${c}:</b> <span class="${item.nome}-${c}">--</span></p>`;
-        });
-
-        container.innerHTML += `
-            <div class="card" id="${item.nome}">
-                <h2>${item.nome}</h2>
-                ${camposHTML}
-                <p class="atualizado" id="${item.nome}-hora">Atualizado: --:--:--</p>
-                <p class="erro" id="${item.nome}-erro"></p>
-            </div>
-        `;
-    });
-}
-
-// Atualizar valores no card
-function atualizarCard(nome, dados) {
-    campos.forEach(campo => {
-        const elemento = document.querySelector(`.${nome}-${campo}`);
-        elemento.textContent = dados[campo] !== undefined ? dados[campo] : "--";
-    });
-
-    const hora = new Date().toLocaleTimeString("pt-BR");
-    document.getElementById(nome + "-hora").textContent = "Atualizado: " + hora;
-    document.getElementById(nome + "-erro").textContent = "";
-}
-
-// Mostrar erro caso a API não responda
-function erroCard(nome) {
-    document.getElementById(nome + "-erro").textContent = "Erro ao carregar dados";
-}
-
-// Atualização geral
-async function atualizarTudo() {
-    for (const item of urls) {
-        try {
-            const r = await fetch(item.url, { cache: "no-store" });
-            const json = await r.json();
-
-            if (json && json.data) {
-                atualizarCard(item.nome, json.data);
-            } else {
-                erroCard(item.nome);
-            }
-
-        } catch (e) {
-            erroCard(item.nome);
-        }
-    }
-}
-
-// Inicialização
-criarCards();
-atualizarTudo();
-
-// Atualizar a cada 2 segundos
-setInterval(atualizarTudo, 2000);
-
-</script>
+<div id="dados-estoque"></div>
+<div id="dados-processo"></div>
+<div id="dados-montagem"></div>
+<div id="dados-expedição"></div>
+<script src="atualizacoes.js"></script>
 
 </body>
 </html>

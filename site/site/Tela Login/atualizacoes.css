@@ -159,5 +159,12 @@ p {
     text-align: center;
     
 }
+
+#dados-estoque { 
+    width: 10vw;
+    height: 10vw;
+    background-color: white;
+    
+}
     
 
