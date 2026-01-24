@@ -10,110 +10,45 @@
 
 <body>
     <header id="superior">
-        <div id="menuPainel"></div>
-    <button id="menuBtn" type="button">
-    <img src="Menu.png" id="menu" >
-    </button>
+       <!-- Botão do menu -->
+  <button id="menuBtn">☰ </button>
+
+  <!-- Menu lateral -->
+  <div id="menuLateral">
+    <a onclick="location.href='telalog.html'">Login</a>
+    <a href="https://discord.gg/nd8RrjKZjG">Discord</a>
+    <a onclick="location.href='controle.html'">Usuario</a>
+    <a onclick="location.href='sup.html'">Suporte</a>
+  </div>
     <a href="bancada.html" class=aba1>Bancada</a>
     <a href="atualizacoes.html" class=aba2>Atualizações</a>
         
     </header>
     <h1 id="titulo"> Proposito do site: </h1>
     <div id="texto">O propósito deste site é disponibilizar uma plataforma completa e moderna para o monitoramento em tempo real das Bancadas Smart 4.0 do SENAI de Indaial, oferecendo uma visão clara e imediata sobre o funcionamento dos equipamentos utilizados nos processos de aprendizagem industrial. Por meio deste sistema, alunos, instrutores e a equipe técnica podem acompanhar continuamente o status operacional de cada bancada, verificando indicadores de desempenho, consumo, atividade, alertas e possíveis falhas que possam comprometer o fluxo das aulas. Além disso, a plataforma possibilita uma análise mais precisa das condições de uso, contribuindo para a manutenção preventiva e garantindo que todos os dispositivos estejam operando de forma segura, eficiente e alinhada às exigências tecnológicas da Indústria 4.0. Dessa forma, o site se torna uma ferramenta essencial para aprimorar a qualidade do ensino, promover a gestão inteligente dos recursos didáticos e fortalecer a integração entre teoria e prática no ambiente educacional do SENAI de Indaial, proporcionando um ecossistema conectado, dinâmico e orientado à inovação.</div>
-<!-- Sistema do menu  -->
-<div id="menuLateral">
-  <ul>
-    <li><a href="#">Início</a></li>
-    <li><a href="#">Produtos</a></li>
-    <li><a href="#">Promoções</a></li>
-    <li><a href="#">Contato</a></li>
-  </ul>
-</div>
+  
 
 
-  <!-- Configuração dos Produto -->
-  <div class="gap">
-    <div class="produto pr1" data-produto="1"></div>
-    <div class="produto pr2" data-produto="2"></div>
-    <div class="produto pr3" data-produto="3"></div>
-  </div>
 
-  <!-- Overlay -->
-  <div class="overlay" id="overlay">
-    <div class="overlay-content">
-      <span class="closeBtn" id="closeBtn">&times;</span>
-      <h2 id="tituloProduto"></h2>
-      <p id="descricaoProduto"></p>
-    </div>
-  </div>
+
 <script>
-/* --------------------- Overlay Produtos --------------------- */
-const overlay = document.getElementById("overlay");
-const closeBtn = document.getElementById("closeBtn");
-const titulo = document.getElementById("tituloProduto");
-const descricao = document.getElementById("descricaoProduto");
 
-// Dados dos produtos
-const produtos = {
-  1: { titulo: "Discord Nitro", descricao: "Versão premium do Discord com emojis animados, melhor qualidade de vídeo e uploads maiores." },
-  2: { titulo: "Discord Nitro Basic", descricao: "Plano básico com alguns benefícios exclusivos para personalização." },
-  3: { titulo: "Discord Boost", descricao: "Aumente o nível do servidor e desbloqueie recursos extras." }
-};
-
-// Abrir overlay
-document.querySelectorAll(".produto").forEach(produto => {
-  produto.addEventListener("click", () => {
-    const id = produto.dataset.produto;
-    titulo.textContent = produtos[id].titulo;
-    descricao.textContent = produtos[id].descricao;
-    overlay.style.display = "flex";
-  });
-});
-
-// Fechar overlay
-closeBtn.addEventListener("click", () => overlay.style.display = "none");
-overlay.addEventListener("click", e => { if (e.target === overlay) overlay.style.display = "none"; });
-
-/* --------------------- Scroll Header --------------------- */
-let lastScrollTop = 0;
-const header = document.getElementById("superior");
-
-window.addEventListener("scroll", () => {
-  const st = window.pageYOffset || document.documentElement.scrollTop;
-  if (st > lastScrollTop) {
-    // Descendo: esconde header
-    header.style.top = "-5vw";
-  } else {
-    // Subindo: mostra header
-    header.style.top = "0";
-  }
-  lastScrollTop = st <= 0 ? 0 : st; // Para evitar negativos
-});
-/* --------------------- Sistema de Menu --------------------- */
 const menuBtn = document.getElementById("menuBtn");
-const menuPainel = document.getElementById("menuPainel");
 const menuLateral = document.getElementById("menuLateral");
 
-// Toggle menu
+// Abrir / fechar menu
 menuBtn.addEventListener("click", (e) => {
-  e.stopPropagation(); // impede que o clique suba e feche
+  e.stopPropagation();
   menuLateral.classList.toggle("aberto");
 });
 
-menuBtn.addEventListener("click", () => {
-    menuPainel.classList.toggle("ativo");
-// Fecha menu clicando fora
-window.addEventListener("click", (e) => {
+// Fechar clicando fora
+document.addEventListener("click", (e) => {
   if (!menuLateral.contains(e.target) && e.target !== menuBtn) {
     menuLateral.classList.remove("aberto");
   }
 });
-// Close the menu when clicking outside of it
-document.addEventListener("click", (event) => {
-    if (!menuPainel.contains(event.target) && event.target !== menuBtn) {
-        menuPainel.classList.remove("ativo");
-    }
-});
+
 </script>
 </body>
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Suporte</title>
+  <link rel="stylesheet" href="sup.css">
+</head>
+
+<body>
+<header id="superior">
+       <!-- Botão do menu -->
+  <button id="menuBtn">☰ </button>
+
+  <!-- Menu lateral -->
+  <div id="menuLateral">
+    <a onclick="location.href='telalog.html'">Login</a>
+    <a href="https://discord.gg/nd8RrjKZjG">Discord</a>
+    <a onclick="location.href='controle.html'">Usuario</a>
+    </div>
+    <a href="bancada.html" class=aba1>Bancada</a>
+    <a src="atualizacoes.html" class=aba2>Atualizações</a>
+</header> 
+    <div id="suporte">
+      <h2>Suporte</h2>
+    </div>
+
+  <form id="formSuporte">
+    <input type="text" name="nome" placeholder="Seu nome" required>
+
+    <input type="email" name="email" placeholder="Seu email" required>
+
+    <textarea name="mensagem" placeholder="Descreva o problema..." required></textarea>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="sup.js"></script>
+
+</body>
+</html>

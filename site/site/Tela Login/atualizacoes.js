@@ -1,3 +1,4 @@
+
 // ----------------------
 // BANCADAS
 // ----------------------
@@ -45,3 +46,4 @@ function buscarDadosBancadaExpedicao(){                                 // EXPED
     .then(res=>res.json())
     .then(data=>atualizarDadosBancada('dados-expedição', data));
 }
+

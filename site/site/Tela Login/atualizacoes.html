@@ -9,18 +9,98 @@
 <body>
 
 <h1 id="titulo">Monitoramento das Bancadas</h1>
-
 <div id="cards"></div>
     <header id="superior">
-        <a href="bancada.html" class=aba1>Bancada</a>
-        <a href="Alogin.html" class=aba2>Inicio</a>
-        
-    </header>
-<div id="dados-estoque"></div>
-<div id="dados-processo"></div>
-<div id="dados-montagem"></div>
-<div id="dados-expedição"></div>
+<a href="bancada.html" class=aba1>Bancada</a>
+<a href="Alogin.html" class=aba2>Inicio</a>
+
+         <!-- Botão do menu -->
+  <button id="menuBtn">☰</button>
+
+  <!-- Menu lateral -->
+  <div id="menuLateral">
+    <a onclick="location.href='telalog.html'">Login</a>
+    <a href="https://discord.gg/nd8RrjKZjG">Discord</a>
+    <a onclick="location.href='controle.html'">Usuario</a>
+    <a onclick="location.href='sup.html'">Suporte</a>
+    </div>   
+         
+</header>
+    <div id="dados-estoque"></div>
+    <div id="dados-processo"></div>
+    <div id="dados-montagem"></div>
+    <div id="dados-expedição"></div>
+    
+
 <script src="atualizacoes.js"></script>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const menuLateral = document.getElementById("menuLateral");
+
+// Abrir / fechar menu
+menuBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  menuLateral.classList.toggle("aberto");
+});
+
+// Fechar clicando fora
+document.addEventListener("click", (e) => {
+  if (!menuLateral.contains(e.target) && e.target !== menuBtn) {
+    menuLateral.classList.remove("aberto");
+  }
+});
+// ----------------------
+// BANCADAS
+// ----------------------
+window.onload = ()=>{
+    polling(5);
+}
+
+function polling(segundos){
+    setTimeout(()=>{
+        buscarDadosBancadaEstoque();
+        buscarDadosBancadaProcesso();
+        buscarDadosBancadaMontagem();
+        buscarDadosBancadaExpedicao();
+        polling(segundos);
+    },segundos*1000)
+}
+
+function atualizarDadosBancada(id, data){
+    const box = document.getElementById(${id});
+    if(box) {
+        box.innerHTML = `//humi: ${data.humi} <br> ai00: ${data.ai00} <br> vrms: ${data.vrms} <br> irms: ${data.irms} <br> appp: ${data.appp} <br> actp: ${data.actp}`;
+    }
+}
+
+function buscarDadosBancadaEstoque(){                                 // ESTOQUE !!!!!!!!!!!!!!!!!!
+    fetch('http://10.77.241.113:1880/api/smartsense/estoque')
+    .then(res=>res.json())
+    .then(data=>atualizarDadosBancada('dados-estoque', data));
+}
+
+function buscarDadosBancadaProcesso(){                                 // PROCESSO !!!!!!!!!!!!!!!!!!
+    fetch('http://10.77.241.113:1880/api/smartsense/processo')
+    .then(res=>res.json())
+    .then(data=>atualizarDadosBancada('dados-processo', data));
+}
+
+function buscarDadosBancadaMontagem(){                                 // MONTAGEM !!!!!!!!!!!!!!!!!!
+    fetch('http://10.77.241.113:1880/api/smartsense/montagem')
+    .then(res=>res.json())
+    .then(data=>atualizarDadosBancada('dados-montagem', data));
+}
+
+function buscarDadosBancadaExpedicao(){                                 // EXPEDIÇÃO !!!!!!!!!!!!!!!!!!
+    fetch('http://10.77.241.113:1880/api/smartsense/expedicao')
+    .then(res=>res.json())
+    .then(data=>atualizarDadosBancada('dados-expedição', data));
+}
+
+
+</script>
+
 
 </body>
 </html>
+
