@@ -1,29 +1,29 @@
-function logar(e){
-    //Prevenir o recarregamento da página
-    e.preventDefault();
+function logar(e) {
+  //Prevenir o recarregamento da página
+  e.preventDefault();
 
 
-    //Busca os inputs do HTML
-    let input_usuario = document.getElementById("usuario");
-    let input_senha = document.getElementById("senha");
+  //Busca os inputs do HTML
+  let input_usuario = document.getElementById("usuario");
+  let input_senha = document.getElementById("senha");
 
-    //Tratamento de erros, caso não tiver esses elementos
-    if(!input_usuario || !input_senha){
-        return;
-    }
+  //Tratamento de erros, caso não tiver esses elementos
+  if (!input_usuario || !input_senha) {
+    return;
+  }
 
-    console.log(input_usuario)
+  console.log(input_usuario)
 
-    //Se chegou até aqui, conseguiu coletar usuário e senha
-    let usuario = input_usuario.value;
-    let senha = input_senha.value;
+  //Se chegou até aqui, conseguiu coletar usuário e senha
+  let usuario = input_usuario.value;
+  let senha = input_senha.value;
 
- 
+
 
 
 }
 /* Sistemas de aleatorização de partículas */
-(function(){
+(function () {
   const canvas = document.getElementById('particles');
   const ctx = canvas.getContext('2d');
 
@@ -31,7 +31,7 @@ function logar(e){
     canvas.width = innerWidth;
     canvas.height = innerHeight;
   }
-  window.addEventListener('resize', resize, {passive:true});
+  window.addEventListener('resize', resize, { passive: true });
   resize();
 
   const particles = [];
@@ -46,12 +46,12 @@ function logar(e){
     });
   }
 
-  function frame(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+  function frame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgba(255,255,255,0.92)';
     particles.forEach(p => {
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fill();
       p.y += p.v;
       if (p.y > canvas.height + 10) {
@@ -100,31 +100,32 @@ function toggleSenha(id, btn) {
   } else {
     input.type = 'password';
     btn.textContent = '🙉';
-  } 
+  }
 }
 
 /* ---------------- Criar conta ---------------- */
-document.getElementById('btnCreate').addEventListener('click',() => {
+document.getElementById('btnCreate').addEventListener('click', () => {
 
   const data = {
-    nome:        document.getElementById('newNome').value.trim(),
-    sobrenome:   document.getElementById('newSobrenome').value.trim(),
-    nascimento:  document.getElementById('newNascimento').value,
-    email:       document.getElementById('newEmail').value.trim(),
-    user:        document.getElementById('newUser').value.trim(),
-    pass:        document.getElementById('newPass').value
+    nome: document.getElementById('newNome').value.trim(),
+    sobrenome: document.getElementById('newSobrenome').value.trim(),
+    nascimento: document.getElementById('newNascimento').value,
+    email: document.getElementById('newEmail').value.trim(),
+    user: document.getElementById('newUser').value.trim(),
+    pass: document.getElementById('newPass').value
   };
-    fetch("http://localhost:1880/autenticacao/autenticar",{
-        method:"POST",
-        body:JSON.stringify({newNome,newSobrenome,newNascimento,newEmail,newUser,newPass})
-    }).then((resposta)=>{
-        console.log(resposta)
-        if(resposta.ok){
-            resposta.json()
-        }
-    }).then((usuario)=>{
-        window.location.href = "bancada/bancada.html";
-    })
+  fetch("http://localhost:1880/auth/autenticar", {
+
+    method: "POST",
+    body: JSON.stringify(data)
+  }).then((resposta) => {
+    console.log(resposta)
+    if (resposta.ok) {
+      resposta.json()
+    }
+  }).then((usuario) => {
+    window.location.href = "telalog.html";
+  })
 })
 /* -------
   if (!data.nome || !data.sobrenome || !data.nascimento || !data.email || !data.user || !data.pass) {
@@ -142,17 +143,22 @@ document.getElementById('btnLogin').addEventListener('click', () => {
   const user = document.getElementById('loginUser').value.trim();
   const pass = document.getElementById('loginPass').value;
 
-      fetch("http://localhost:1880/autenticacao/autenticar",{
-        method:"POST",
-        body:JSON.stringify({user ,pass})
-    }).then((resposta)=>{
-        console.log(resposta)
-        if(resposta.ok){
-            resposta.json()
-        }
-    }).then((usuario)=>{
-        window.location.href = "Alogin.html";
-    })
+  fetch("http://localhost:1880/autenticacao/autenticar", {
+    method: "POST",
+    body: JSON.stringify({ user, pass })
+  }).then((resposta) => {
+    console.log(resposta)
+    if (resposta.ok) {
+      resposta.json()
+    }
+  }).then((usuario) => {
+    window.location.href = "Alogin.html";
+  })
+  const acc = {
+    user: "",
+    pass: ""
+  };
+
 
   if (user === acc.user && pass === acc.pass) {
     alert("Login bem-sucedido!");
