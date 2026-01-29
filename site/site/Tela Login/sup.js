@@ -6,8 +6,8 @@ form.addEventListener("submit", function(e) {
   e.preventDefault();
 
   emailjs.sendForm(
-    "service_3hjqhqt",
-    "template_teclk1q",
+    "service_t7k0r1e",
+    "template_dks2bhy",
     this
   ).then(() => {
     alert("Mensagem enviada com sucesso!");
