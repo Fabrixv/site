@@ -5,6 +5,15 @@
 window.onload = ()=>{
     polling(5);
 }
+  fetch('http://localhost:1880/atualizacoes/log', {
+    method: "GET"
+  }).then((resposta) => {
+    console.log(resposta)
+    if (resposta.ok) {
+      resposta.json()
+    }
+  })
+
 
 function polling(segundos){
     setTimeout(()=>{
@@ -17,7 +26,7 @@ function polling(segundos){
 }
 
 function atualizarDadosBancada(id, data){
-    const box = document.getElementById(${id});
+    const box = document.getElementById(id);
     if(box) {
         box.innerHTML = `//humi: ${data.humi} <br> ai00: ${data.ai00} <br> vrms: ${data.vrms} <br> irms: ${data.irms} <br> appp: ${data.appp} <br> actp: ${data.actp}`;
     }
