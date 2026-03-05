@@ -114,7 +114,7 @@ document.getElementById('btnCreate').addEventListener('click', () => {
     user: document.getElementById('newUser').value.trim(),
     pass: document.getElementById('newPass').value
   };
-  fetch("http://localhost:1880/auth/autenticar", {
+   fetch("http://localhost:1880/auth/autenticar", {
 
     method: "POST",
     body: JSON.stringify(data)
@@ -124,7 +124,7 @@ document.getElementById('btnCreate').addEventListener('click', () => {
       resposta.json()
     }
   }).then((usuario) => {
-    window.location.href = "telalog.html";
+    //window.location.href = "telalog.html";
   })
 })
 /* -------
@@ -148,24 +148,13 @@ document.getElementById('btnLogin').addEventListener('click', () => {
     body: JSON.stringify({ user, pass })
   }).then((resposta) => {
     console.log(resposta)
-    if (resposta.ok) {
-      resposta.json()
+    if(resposta.status === 200) {
+      window.location.href = "Alogin.html";
+    }else{
+      alert("Usuário ou senha incorretos!");
     }
-  }).then((usuario) => {
-    window.location.href = "Alogin.html";
   })
-  const acc = {
-    user: "",
-    pass: ""
-  };
 
-
-  if (user === acc.user && pass === acc.pass) {
-    alert("Login bem-sucedido!");
-    location.href = "Alogin.html";
-  } else {
-    alert("Usuário ou senha incorretos!");
-  }
 });
 
 /* ---------------- Recuperar senha ---------------- */
@@ -197,27 +186,27 @@ if (!users) {
 }
 
 // ===== LOGIN =====
-document.getElementById('btnLogin').addEventListener('click', () => {
-  const user = document.getElementById('loginUser').value.trim();
-  const pass = document.getElementById('loginPass').value;
+// document.getElementById('btnLogin').addEventListener('click', () => {
+//   const user = document.getElementById('loginUser').value.trim();
+//   const pass = document.getElementById('loginPass').value;
 
-  const users = JSON.parse(localStorage.getItem("app_users")) || [];
+//   const users = JSON.parse(localStorage.getItem("app_users")) || [];
 
-  const found = users.find(u => u.user === user && u.pass === pass);
+//   const found = users.find(u => u.user === user && u.pass === pass);
 
-  if (!found) {
-    return;
-  }
+//   if (!found) {
+//     return;
+//   }
 
-  // salva quem logou
-  localStorage.setItem("logged_user", JSON.stringify(found));
+//   // salva quem logou
+//   localStorage.setItem("logged_user", JSON.stringify(found));
 
-  // redireciona
-  if (found.role === "admin") {
-    location.href = "adm.html";
-  } else {
-    location.href = "Alogin.html";
-  }
-});
+//   // redireciona
+//   if (found.role === "admin") {
+//     location.href = "adm.html";
+//   } else {
+//     location.href = "Alogin.html";
+//   }
+// });
 
 

@@ -8,21 +8,27 @@
 <body>
 
   <h1>Painel do Administrador</h1>
-  <p>Usuários cadastrados no sistema</p>
-<table id="usersTable">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Login</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+  <h2>Usuários cadastrados no sistema</h2>
 
 
-  <button id="logoutBtn">Sair</button>
+<section id="alter_user">
+</div>
+</header>
+<div class="box">
+  <h2>Minha Conta</h2>
+  <input id="id" type="number" placeholder="Id">
+  <input id="nome" placeholder="Nome">
+  <input id="sobrenome" placeholder="Sobrenome">
+  <input id="email" placeholder="Email">
+  <input id="user" placeholder="Usuário">
+  <input id="pass" type="password" placeholder="Senha">
+
+  <button class="buscar" id="buscar" onclick="buscarUserEdicao()">Buscar</button>
+  <button class="ok" id="salvar">Salvar Alterações</button>
+  <button id="logoutBtn" onclick="logout()">Sair</button>
+  <button class="danger" id="deletar">Deletar Conta</button>
+  
+</section>
 
   <script src="adm.js"></script>
 </body>
