@@ -1,9 +1,9 @@
 function carregarUsuarios() {
-    fetch("http://localhost:1880/auth/autenticar") // rota do Node-RED
+    fetch("http://localhost:1880/auth/autenticar")
         .then(res => res.json())
         .then(data => {
             const tbody = document.querySelector("#usersTable tbody");
-            tbody.innerHTML = ""; // limpa antes de preencher
+            tbody.innerHTML = "";
 
             data.forEach(user => {
                 const tr = document.createElement("tr");
@@ -19,8 +19,7 @@ function carregarUsuarios() {
         .catch(err => console.error("Erro ao carregar usuários:", err));
 }
 
-// Chama a função quando a página carrega
-window.onload = carregarUsuarios;
+
 
 // logout
 document.getElementById("logoutBtn").addEventListener("click", () => {
@@ -64,7 +63,6 @@ document.getElementById('deletar').onclick = () => {
     location.href = "telalog.html";
   }
 };
-
 async function buscarUserEdicao() {
 
 let id = document.getElementById("id").value.trim();
@@ -79,11 +77,15 @@ body: JSON.stringify({ id: id })
 
 const dados = await resposta.json();
 
+if (!dados || dados.length === 0) {
+  alert("Usuário não encontrado");
+  return;
+}
 let user = dados[0];
 
 document.getElementById("nome").value = user.nome;
 document.getElementById("sobrenome").value = user.sobrenome;
 document.getElementById("email").value = user.email;
-document.getElementById("usuario").value = user.user;
-
-}
+document.getElementById("user").value = user.user;
+document.getElementById("pass").value = user.pass;
+};

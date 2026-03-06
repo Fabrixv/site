@@ -186,27 +186,27 @@ if (!users) {
 }
 
 // ===== LOGIN =====
-// document.getElementById('btnLogin').addEventListener('click', () => {
-//   const user = document.getElementById('loginUser').value.trim();
-//   const pass = document.getElementById('loginPass').value;
+ document.getElementById('btnLogin').addEventListener('click', () => {
+   const user = document.getElementById('loginUser').value.trim();
+   const pass = document.getElementById('loginPass').value;
 
-//   const users = JSON.parse(localStorage.getItem("app_users")) || [];
+   const users = JSON.parse(localStorage.getItem("app_users")) || [];
 
-//   const found = users.find(u => u.user === user && u.pass === pass);
+   const found = users.find(u => u.user === user && u.pass === pass);
 
-//   if (!found) {
-//     return;
-//   }
+   if (!found) {
+     return;
+   }
 
 //   // salva quem logou
-//   localStorage.setItem("logged_user", JSON.stringify(found));
+   localStorage.setItem("logged_user", JSON.stringify(found));
 
-//   // redireciona
-//   if (found.role === "admin") {
-//     location.href = "adm.html";
-//   } else {
-//     location.href = "Alogin.html";
-//   }
-// });
+   // redireciona
+   if (found.role === "admin") {
+     location.href = "adm.html";
+   } else {
+     location.href = "Alogin.html";
+   }
+ });
 
 
