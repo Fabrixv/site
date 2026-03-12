@@ -124,7 +124,8 @@ document.getElementById('btnCreate').addEventListener('click', () => {
       resposta.json()
     }
   }).then((usuario) => {
-    //window.location.href = "telalog.html";
+    alert('Conta criada com sucesso!');
+    window.location.href = "telalog.html";
   })
 })
 /* -------

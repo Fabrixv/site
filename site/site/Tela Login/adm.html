@@ -21,14 +21,35 @@
   <input id="sobrenome" placeholder="Sobrenome">
   <input id="email" placeholder="Email">
   <input id="user" placeholder="Usuário">
-  <input id="pass" type="password" placeholder="Senha">
 
+<div class="senha-container">
+  <input id="pass" type="password" placeholder="Senha">
+  <label>
+    <input type="checkbox" id="showPass"> Mostrar senha
+  </label>
+</div>
   <button class="buscar" id="buscar" onclick="buscarUserEdicao()">Buscar</button>
   <button class="ok" id="salvar">Salvar Alterações</button>
   <button id="logoutBtn" onclick="logout()">Sair</button>
   <button class="danger" id="deletar">Deletar Conta</button>
   
 </section>
+<button onclick="carregarUsuarios()">Carregar Usuários</button>
+
+<table id="usersTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Usuário</th>
+            <th>Senha</th>
+            <th>Data de Nascimento</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 
   <script src="adm.js"></script>
 </body>
