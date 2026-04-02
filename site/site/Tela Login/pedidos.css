@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0141, #1a237e);
+    color: white;
+    text-align: center;
+}
+
+#topo {
+    background: #0074f8;
+    padding: 15px;
+}
+
+#topo a {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+h1 {
+    margin-top: 30px;
+}
+
+#tabela-bancadas {
+    width: 80%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#tabela-bancadas th {
+    background: #0074f8;
+    color: white;
+    padding: 12px;
+}
+
+#tabela-bancadas td {
+    padding: 10px;
+    text-align: center;
+}
+
+#tabela-bancadas tr:nth-child(even) {
+    background: #f2f2f2;
+}
+#formulario {
+    margin-top: 20px;
+}
+
+#formulario input,
+#formulario select {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+#formulario button {
+    padding: 10px 20px;
+    background: #00c853;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#formulario button:hover {
+    background: #009624;
+}

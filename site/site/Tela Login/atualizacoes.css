@@ -34,7 +34,8 @@ body {
     box-shadow: 0 4px 12px rgba(0, 116, 248, 0.6);
     position: fixed;
     top: 0;
-    width: 100vw; 
+    width: 110vw;
+     
 }
  
 .aba1, .aba2 {
@@ -165,7 +166,8 @@ body {
 
 #dados-estoque {
   width: 18vw;
-  height: 14vw;
+  height: 24vw;
+  color:black;
   background-color: #fff;
   border-radius: 12px;
   position: absolute;
@@ -175,18 +177,20 @@ body {
 
 #dados-processo {
   width: 18vw;
-  height: 14vw;
+  height: 24vw;
+  color:black;
   background-color: #fff;
   border-radius: 12px;
   position: absolute;
   top: 14vw;
-  left: 27.5vw; /* distância do primeiro */
+  left: 27.5vw;
 }
 
 #dados-montagem {
   width: 18vw;
-  height: 14vw;
+  height: 24vw;
   background-color: #fff;
+  color:black;  
   border-radius: 12px;
   position: absolute;
   top: 14vw;
@@ -195,10 +199,39 @@ body {
 
 #dados-expedição {
   width: 18vw;
-  height: 14vw;
+  height: 24vw;
   background-color: #fff;
+  color:black;
   border-radius: 12px;
   position: absolute;
   top: 14vw;
   left: 78vw;
 }
+
+#dados-estoque,
+#dados-processo,
+#dados-montagem,
+#dados-expedicao {
+    position: absolute  ;
+    z-index: 10;
+}
+
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 80%;
+    margin: 30px auto;
+}
+
+.quadrado {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+

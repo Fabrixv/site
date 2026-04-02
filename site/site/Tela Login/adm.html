@@ -7,23 +7,54 @@
 </head>
 <body>
 
+<header>
   <h1>Painel do Administrador</h1>
-  <p>Usuários cadastrados no sistema</p>
-<table id="usersTable">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Login</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+</header>
 
+<!-- EDITAR -->
+<section class="box">
+  <h2>Editar Usuário</h2>
 
-  <button id="logoutBtn">Sair</button>
+  <input id="id" type="number" placeholder="ID">
+  <input id="nome" placeholder="Nome">
+  <input id="sobrenome" placeholder="Sobrenome">
+  <input id="email" placeholder="Email">
+  <input id="user" placeholder="Usuário">
 
-  <script src="adm.js"></script>
+  <div class="senha-container">
+    
+    <input id="pass" type="password" placeholder="Senha">
+  <button type="button" onclick="toggleSenha('pass', this)">🙈</button>
+  </input>
+  </div>
+
+  <div class="botoes">
+    <button class="ok" id="salvar">Salvar</button>
+    <button class="danger" id="deletar">Deletar</button>
+    <button id="logoutBtn">Sair</button>
+  </div>
+</section>
+
+<!-- LISTAGEM  -->
+<section class="lista-box">
+  <h2>Lista de Usuários</h2>
+
+  <button class="refresh" onclick="carregarUsuarios()">Atualizar</button>
+
+  <table id="usersTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Usuário</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<script src="adm.js"></script>
 </body>
 </html>

@@ -1,45 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: #fff;
-  padding: 30px;
+    font-family: 'Segoe UI';
+    background: linear-gradient(135deg, #0f0141, #1a237e);
+    color: white;
+    padding-top: 80px;
+    text-align: center;
 }
 
-h1 {
-  margin-bottom: 10px;
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background: #0074f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,116,248,0.5);
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background: #020617;
+h2 {
+    margin-bottom: 15px;
+    color: #cfd8ff;
 }
 
-th, td {
-  padding: 12px;
-  border-bottom: 1px solid #1e293b;
-  text-align: left;
+/* BOX EDITAR */
+.box {
+    width: 320px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
 }
 
-th {
-  color: #38bdf8;
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 6px;
+    border: none;
 }
 
-tr:hover {
-  background: #020617;
+.senha-container {
+    text-align: left;
+    font-size: 0.9rem;
 }
 
 button {
-  margin-top: 20px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  background: #38bdf8;
-  cursor: pointer;
-  font-weight: bold;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #0074f8;
+    color: white;
 }
 
 button:hover {
-  opacity: 0.85;
+    background: #005ed1;
+}
+
+.ok { background: #00c853; }
+.buscar { background: #ff9800; }
+.danger { background: #ff3b3b; }
+
+/* LISTA */
+.lista-box {
+    width: 90%;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+}
+
+.refresh {
+    margin-bottom: 10px;
+}
+
+/* TABELA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #0074f8;
+    padding: 12px;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* CLIQUE */
+tr {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+tr:hover {
+    background: rgba(0,116,248,0.2);
+}
+
+tr.selected {
+    background: rgba(0,116,248,0.4);
+}
+.senha-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.senha-container input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+.senha-container button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #0074f8;
+  color: white;
+  cursor: pointer;
+  min-width: 45px;
+}
+
+.senha-container button:hover {
+  background: #005ed1;
 }

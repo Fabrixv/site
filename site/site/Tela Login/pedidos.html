@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabela de Pedidos</title>
+    <link rel="stylesheet" href="pedidos.css">
+</head>
+
+<body>
+
+<header id="topo">
+    <a href="atualizacoes.html">Atualizações</a>
+    <a href="bancada.html">Bancada</a>
+</header>
+
+<h1>Adicionar Pedido</h1>
+
+<div id="formulario">
+    <!-- Nome do usuário -->
+    <input type="text" id="nome_usuario" placeholder="Seu nome" required>
+    
+    <!-- Nome da bancada -->
+    <select id="bancada">
+        <option value="estoque">Estoque</option>
+        <option value="processo">Processo</option>
+        <option value="montagem">Montagem</option>
+        <option value="expedicao">Expedição</option>
+    </select>
+
+    <!-- Quantidade -->
+    <input type="number" id="quantidade" placeholder="Quantidade" min="1" value="1" required>
+
+    <button onclick="adicionarPedido()">Adicionar</button>
+</div>
+
+<h1>Pedidos das Bancadas</h1>
+
+<table id="tabela-bancadas">
+    <thead>
+        <tr>
+            <th>Bancada</th>
+            <th>Status</th>
+            <th>Quantidade</th>
+            <th>Usuário</th>
+            <th>Data Criação</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script src="pedidos.js"></script>
+</body>
+</html>
